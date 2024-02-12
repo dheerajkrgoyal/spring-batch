@@ -13,6 +13,8 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
@@ -40,12 +42,20 @@ public class CustomerJobConfig {
     }
 
     @Bean
+    public TaskExecutor taskExecutor(){
+        SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
+        taskExecutor.setConcurrencyLimit(10);
+        return taskExecutor;
+    }
+
+    @Bean
     public Step customerStep(JobRepository jobRepository, PlatformTransactionManager transactionManager){
         return new StepBuilder(STEP_NAME, jobRepository)
                 .<Customer, Customer>chunk(10, transactionManager)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
+                .taskExecutor(taskExecutor())
                 .build();
     }
 

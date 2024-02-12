@@ -23,7 +23,7 @@ public class JobController {
     JobRegistry jobRegistry;
 
     @PostMapping("/{jobName}")
-    public void runJon(@PathVariable String jobName) throws NoSuchJobException, JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
+    public void runJob(@PathVariable String jobName) throws NoSuchJobException, JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         jobLauncher.run(jobRegistry.getJob(jobName), new JobParameters());
     }
 }
