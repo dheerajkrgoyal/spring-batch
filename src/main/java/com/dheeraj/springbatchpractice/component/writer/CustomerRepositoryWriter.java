@@ -15,6 +15,7 @@ public class CustomerRepositoryWriter  implements ItemWriter<Customer> {
 
     @Override
     public void write(Chunk<? extends Customer> chunk) throws Exception {
+        System.out.println("Current thread: " + Thread.currentThread().getName());
         customerRepository.saveAll(chunk);
     }
 }
