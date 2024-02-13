@@ -1,10 +1,10 @@
-package com.dheeraj.springbatchpractice.config;
+package com.dheeraj.springbatchpractice.customer.config;
 
-import com.dheeraj.springbatchpractice.component.processor.CustomerProcessor;
-import com.dheeraj.springbatchpractice.component.reader.CustomerCSVReader;
-import com.dheeraj.springbatchpractice.component.writer.CustomerRepositoryWriter;
-import com.dheeraj.springbatchpractice.entity.Customer;
-import com.dheeraj.springbatchpractice.partition.CustomerPartitioner;
+import com.dheeraj.springbatchpractice.customer.component.processor.CustomerProcessor;
+import com.dheeraj.springbatchpractice.customer.component.reader.CustomerCSVReader;
+import com.dheeraj.springbatchpractice.customer.component.writer.CustomerRepositoryWriter;
+import com.dheeraj.springbatchpractice.customer.entity.Customer;
+import com.dheeraj.springbatchpractice.customer.partition.CustomerPartitioner;
 import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -28,21 +28,21 @@ public class CustomerJobConfig {
     private static final String MASTER_STEP_NAME = "master_customer_step";
     private static final String JOB_NAME = "customer_job";
 
-    private CustomerRepositoryWriter writer;
+    private CustomerRepositoryWriter customerRepositoryWriter;
 
     @Bean
-    public FlatFileItemReader<Customer> reader(){
+    public FlatFileItemReader<Customer> customerItemReader(){
         return CustomerCSVReader.getCustomerCSVReader();
     }
 
     @Bean
-    public CustomerProcessor processor(){
+    public CustomerProcessor customerProcessor(){
         return new CustomerProcessor();
     }
 
     @Bean
-    public CustomerRepositoryWriter writer(){
-        return writer;
+    public CustomerRepositoryWriter customerItemWriter(){
+        return customerRepositoryWriter;
     }
 
     @Bean
@@ -80,9 +80,9 @@ public class CustomerJobConfig {
     public Step customerStep(JobRepository jobRepository, PlatformTransactionManager transactionManager){
         return new StepBuilder(SLAVE_STEP_NAME, jobRepository)
                 .<Customer, Customer>chunk(500, transactionManager)
-                .reader(reader())
-                .processor(processor())
-                .writer(writer())
+                .reader(customerItemReader())
+                .processor(customerProcessor())
+                .writer(customerItemWriter())
                 .build();
     }
 

@@ -1,6 +1,6 @@
-package com.dheeraj.springbatchpractice.repository;
+package com.dheeraj.springbatchpractice.customer.repository;
 
-import com.dheeraj.springbatchpractice.entity.Customer;
+import com.dheeraj.springbatchpractice.customer.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.dheeraj.springbatchpractice.partition;
+package com.dheeraj.springbatchpractice.customer.partition;
 
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;

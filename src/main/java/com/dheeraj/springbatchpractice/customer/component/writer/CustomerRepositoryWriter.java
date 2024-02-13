@@ -1,7 +1,7 @@
-package com.dheeraj.springbatchpractice.component.writer;
+package com.dheeraj.springbatchpractice.customer.component.writer;
 
-import com.dheeraj.springbatchpractice.entity.Customer;
-import com.dheeraj.springbatchpractice.repository.CustomerRepository;
+import com.dheeraj.springbatchpractice.customer.entity.Customer;
+import com.dheeraj.springbatchpractice.customer.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;

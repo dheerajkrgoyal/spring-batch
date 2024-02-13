@@ -1,6 +1,6 @@
-package com.dheeraj.springbatchpractice.component.reader;
+package com.dheeraj.springbatchpractice.customer.component.reader;
 
-import com.dheeraj.springbatchpractice.entity.Customer;
+import com.dheeraj.springbatchpractice.customer.entity.Customer;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -11,7 +11,7 @@ public class CustomerCSVReader {
     public static FlatFileItemReader<Customer> getCustomerCSVReader(){
         FlatFileItemReader<Customer> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setLinesToSkip(1);
-        flatFileItemReader.setResource(new ClassPathResource("customers.csv")); // set resource
+        flatFileItemReader.setResource(new ClassPathResource("customer/customers.csv")); // set resource
 
         DefaultLineMapper<Customer> lineMapper = new DefaultLineMapper<>();
 

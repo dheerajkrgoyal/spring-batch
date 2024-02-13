@@ -1,6 +1,6 @@
-package com.dheeraj.springbatchpractice.component.processor;
+package com.dheeraj.springbatchpractice.customer.component.processor;
 
-import com.dheeraj.springbatchpractice.entity.Customer;
+import com.dheeraj.springbatchpractice.customer.entity.Customer;
 import org.springframework.batch.item.ItemProcessor;
 
 public class CustomerProcessor implements ItemProcessor<Customer, Customer> {
